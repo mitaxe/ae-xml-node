@@ -29,8 +29,8 @@ function searchElementInDoc (file, attrs) {
   const dom = new JSDOM(sampleFile)
   const btnClass = attrs.class.split(' ')[0]
   const nodes = dom.window.document.querySelectorAll(`.${btnClass}`)
-  const scoredElements = Object.keys(nodes).map(item => ({
-    element: nodes[item],
+  const scoredElements = Object.keys(nodes).map(key => ({
+    element: nodes[key],
     score: 0
   }))
 
@@ -77,9 +77,8 @@ function userInfo (nodePath, searchable, attrs) {
 
 function getNestedNodeRecursively (elem, arr = []) {
   if (elem.parentNode) {
-    const newNode = elem.parentNode
     arr.push(elem.parentNode)
-    getNestedNodeRecursively(newNode, arr)
+    getNestedNodeRecursively(elem.parentNode, arr)
   }
 
   return arr
